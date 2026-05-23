@@ -1,0 +1,2 @@
+# Easy_Desktop_Plugin_Interface
+适用于Easy_Desktop插件的接口,包含所有Easy_Desktop能接入的接口.licenses:LGPL3.0
