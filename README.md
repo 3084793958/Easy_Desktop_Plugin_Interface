@@ -7,6 +7,8 @@
 
 同时包含Ext_Preview_PluginInterface的接口(预览控件(Preview_File_Widget)的插件)
 
+26.6.9:新增壁纸插件接口(Ext_Wallpaper_Interface)
+
 ## 许可证
 LGPL3.0
 
