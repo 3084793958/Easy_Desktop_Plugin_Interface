@@ -1,6 +1,8 @@
 #ifndef PREVIEW_FILE_INTERFACE_H
 #define PREVIEW_FILE_INTERFACE_H
 
+#include <QtGlobal>
+
 class QFileInfo;
 class QAction;
 class QMenu;
@@ -22,7 +24,7 @@ class QMovie;
 class GraphicsViewer_Interface
 {
 public:
-    virtual ~GraphicsViewer_Interface() {}
+    virtual ~GraphicsViewer_Interface();
     virtual void setImage(const QImage &image) = 0;
     virtual void setPixmap(const QPixmap &pixmap) = 0;
     virtual void setGif(const QFileInfo &info) = 0;
@@ -35,14 +37,26 @@ public:
 class PdfViewer_Interface
 {
 public:
-    virtual ~PdfViewer_Interface() {}
+    virtual ~PdfViewer_Interface();
     virtual void resetZoom() = 0;
+};
+class PdfViewer_Interface_V_0_0_2
+{
+public:
+    virtual ~PdfViewer_Interface_V_0_0_2();
+
+    virtual void setFilePath(const QString &path) = 0;
+    virtual void clear() = 0;
+    virtual void goToPreviousPage() = 0;
+    virtual void goToNextPage() = 0;
+    virtual int  currentPage() const = 0;
+    virtual int  pageCount() const = 0;
 };
 
 class Zip_TreeView_Carrier_Interface
 {
 public:
-    virtual ~Zip_TreeView_Carrier_Interface() {}
+    virtual ~Zip_TreeView_Carrier_Interface();
     virtual void setupTar(const QFileInfo &info) = 0;
     virtual void clear() = 0;
 };
@@ -50,10 +64,36 @@ public:
 class QPdfView;
 class QGraphicsView;
 
+class Audio_Wave_Widget_Interface
+{
+public:
+    virtual ~Audio_Wave_Widget_Interface();
+    virtual void   resetZoom()                                  = 0;
+    virtual void   setFileInfo(const QFileInfo &fileinfo)       = 0;
+    virtual void   setPosition(long long int position)          = 0;
+    virtual void   clear()                                      = 0;
+    virtual void   setType(int type, const QFileInfo &fileinfo) = 0;
+    virtual void   force_update()                               = 0;
+    virtual QColor get_left_color()                             = 0;
+    virtual QColor get_right_color()                            = 0;
+    virtual double get_max_samples_size_factor()                = 0;
+    virtual QColor get_currentPos_color()                       = 0;
+};
+
+class Audio_Wave_Widget_Interface_V_0_0_2
+{
+public:
+    virtual ~Audio_Wave_Widget_Interface_V_0_0_2();
+    virtual void setMediaDurationMs(qint64 ms) = 0;
+    virtual QColor get_bar_color() = 0;
+    virtual QColor get_arrow_color() = 0;
+    virtual QColor get_arrow_hover_color() = 0;
+};
+
 class Preview_File_Interface
 {
 public:
-    virtual ~Preview_File_Interface() {}
+    virtual ~Preview_File_Interface();
 public:
     virtual void onPrevClicked() = 0;
     virtual void onNextClicked() = 0;
@@ -98,14 +138,15 @@ public:
     virtual QPushButton *get_force_read_Button() = 0;
 
     virtual QTextEdit *get_m_textEdit() = 0;
+
     virtual QComboBox *get_m_textModeCombo() = 0;
     virtual QPdfDocument *get_m_pdfDocument() = 0;
     virtual PdfViewer_Interface *get_m_pdfViewer() = 0;
     virtual GraphicsViewer_Interface *get_m_imageViewer() = 0;
-    virtual QMediaPlayer *get_m_mediaPlayer() = 0;
+    QT_DEPRECATED_X("V0.0.4废弃,返回nullptr") virtual QMediaPlayer *get_m_mediaPlayer() = 0;
     virtual GraphicsViewer_Interface *get_m_videoViewer() = 0;
 
-    virtual QPdfView *get_m_pdfViewer_as_QPdfView() = 0;
+    QT_DEPRECATED_X("V0.0.4废弃,返回nullptr") virtual QPdfView *get_m_pdfViewer_as_QPdfView() = 0;
     virtual QGraphicsView *get_m_imageViewer_as_QGraphicsView() = 0;
     virtual QGraphicsView *get_m_videoViewer_as_QGraphicsView() = 0;
 
@@ -119,44 +160,61 @@ public:
 class Preview_File_Interface_V_0_0_2
 {
 public:
-    virtual ~Preview_File_Interface_V_0_0_2() {}
+    virtual ~Preview_File_Interface_V_0_0_2();
     virtual void setupTarPreview(const QFileInfo &info) = 0;
     virtual Zip_TreeView_Carrier_Interface *get_m_zip_treeview() = 0;
     virtual QWidget *get_m_zip_treeview_as_QWidget() = 0;
 };
 
-class Audio_Wave_Widget_Interface
-{
-public:
-    virtual ~Audio_Wave_Widget_Interface() {}
-    virtual void   resetZoom()                                  = 0;
-    virtual void   setFileInfo(const QFileInfo &fileinfo)       = 0;
-    virtual void   setPosition(long long int position)          = 0;
-    virtual void   clear()                                      = 0;
-    virtual void   setType(int type, const QFileInfo &fileinfo) = 0;
-    virtual void   force_update()                               = 0;
-    virtual QColor get_left_color()                             = 0;
-    virtual QColor get_right_color()                            = 0;
-    virtual double get_max_samples_size_factor()                = 0;
-    virtual QColor get_currentPos_color()                       = 0;
-};
-
 class Preview_File_Interface_V_0_0_3
 {
 public:
-    virtual ~Preview_File_Interface_V_0_0_3() {}
+    virtual ~Preview_File_Interface_V_0_0_3();
     virtual QMenu                       *get_audio_wave_View_Mode_Menu      () = 0;
     virtual QAction                     *get_audio_wave_Mode_Unknown        () = 0;
     virtual QAction                     *get_audio_wave_Mode_RMS            () = 0;
     virtual QAction                     *get_audio_wave_Mode_dB             () = 0;
     virtual QAction                     *get_audio_wave_Mode_peaks          () = 0;
-    virtual QAction                     *get_set_audio_wave_left_color      () = 0;
-    virtual QAction                     *get_set_audio_wave_right_color     () = 0;
+    QT_DEPRECATED_X("V0.0.4废弃,返回nullptr") virtual QAction *get_set_audio_wave_left_color() = 0;
+    QT_DEPRECATED_X("V0.0.4废弃,返回nullptr") virtual QAction *get_set_audio_wave_right_color() = 0;
     virtual QComboBox                   *get_m_audio_wave_ModeCombo         () = 0;
     virtual Audio_Wave_Widget_Interface *get_m_audio_wave_widget            () = 0;
     virtual QWidget                     *get_m_audio_wave_widget_as_QWidget () = 0;
     virtual QAction                     *get_set_audio_wave_size_factor     () = 0;
-    virtual QAction                     *get_set_audio_wave_currentPos_color() = 0;
+    QT_DEPRECATED_X("V0.0.4废弃,返回nullptr") virtual QAction *get_set_audio_wave_currentPos_color() = 0;
+};
+
+class QPlainTextEdit;
+class QAbstractScrollArea;
+
+class Preview_File_Interface_V_0_0_4
+{
+public:
+    virtual ~Preview_File_Interface_V_0_0_4();
+    virtual QAction     *get_set_audio_wave_View_style_action      () = 0;
+    virtual QAction     *get_set_style_action                      () = 0;
+    virtual QMenu       *get_image_rendering_Mode_Menu             () = 0;
+    virtual QAction     *get_image_rendering_Mode_DYNAMIC          () = 0;
+    virtual QAction     *get_image_rendering_Mode_STATIC           () = 0;
+    virtual QComboBox   *get_m_RenderingModeCombo                  () = 0;
+    virtual QMenu       *get_svg_rendering_Mode_Menu               () = 0;
+    virtual QAction     *get_svg_rendering_Mode_RSVG               () = 0;
+    virtual QAction     *get_svg_rendering_Mode_QTSVG              () = 0;
+    virtual QComboBox   *get_m_Rsvg_or_Qt_RenderingCombo           () = 0;
+    virtual QPlainTextEdit *get_m_plaintextEdit() = 0;
+    virtual QMenu     *get_rendering_backend_Menu     () = 0;
+    virtual QMenu     *get_pdf_rendering_Mode_Menu    () = 0;
+    virtual QAction   *get_pdf_rendering_Mode_QPDF    () = 0;
+    virtual QAction   *get_pdf_rendering_Mode_POPPLER () = 0;
+    virtual QComboBox *get_m_pdf_RenderingModeCombo   () = 0;
+    virtual PdfViewer_Interface_V_0_0_2 *get_m_pdfViewer_V_0_0_2() = 0;
+    virtual void *get_PopplerDocument() = 0;
+    virtual QAbstractScrollArea *get_PopplerView() = 0;
+    virtual QAction *get_textEdit_Mode_TEXT_NO_MARK() = 0;
+    virtual QAction *get_textEdit_Mode_HEX_NO_MARK() = 0;
+    virtual QMenu *get_media_control_Menu() = 0;
+    virtual void *get_m_mediaPlayer_as_FFmpeg_Player() = 0;
+    virtual QAbstractScrollArea *get_m_pdfViewer_as_QAbstractScrollArea() = 0;
 };
 
 #endif // PREVIEW_FILE_INTERFACE_H
