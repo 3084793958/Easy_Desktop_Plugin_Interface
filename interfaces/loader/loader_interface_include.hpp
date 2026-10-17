@@ -17,5 +17,6 @@
 #include "qsvg_loader_interface.h"
 #include "rsvg_loader_interface.h"
 #include "x11_loader_interface.h"
+#include "wayland_loader_interface.h"
 
 #endif // LOADER_INTERFACE_INCLUDE_HPP

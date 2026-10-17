@@ -2,6 +2,7 @@
 #define ARCHIVE_LOADER_INTERFACE_H
 
 #include "interfaces/easy_desktop_class.h"
+#include <stddef.h>
 
 struct archive;
 struct archive_entry;
